@@ -9,6 +9,8 @@ The primary goal of this project is to use advanced SQL querying techniques to a
 	FROM	schools
 	GROUP BY decade
 	ORDER BY decade;
+ 
+![task 1](https://github.com/user-attachments/assets/e75d819c-18b7-4df0-98c0-607f366872da)
 
 
 ###  2. What are the names of the top 5 schools that produced the most players?
@@ -20,6 +22,8 @@ The primary goal of this project is to use advanced SQL querying techniques to a
 	GROUP BY s.schoolID
 	ORDER BY num_players DESC
 	LIMIT 5;
+
+ ![task 2](https://github.com/user-attachments/assets/b6516a2e-417d-4256-a4d2-5214491c2056)
 
 ### 3. For each decade, what were the names of the top 3 schools that produced the most players? 
 
@@ -34,7 +38,9 @@ The primary goal of this project is to use advanced SQL querying techniques to a
 	FROM rn
 	WHERE row_num <= 3
 	ORDER BY decade DESC, row_num;
- 
+
+ ![task 3](https://github.com/user-attachments/assets/702db1a0-6d89-41a8-ab7b-382a07e8bbc3)
+
  ### 4. Return the top 20% of teams in terms of average annual spending?
  
 	WITH ts AS (SELECT teamID, yearID, SUM(salary) AS total_spend
@@ -49,6 +55,8 @@ The primary goal of this project is to use advanced SQL querying techniques to a
 	FROM sp
 	WHERE spend_pct = 1;
 
+ ![task 4](https://github.com/user-attachments/assets/30d19243-e18e-43d6-883c-8e92197d0009)
+
  ### 5. For each team, show the cumulative sum of spending over the years?
  
 	WITH ts AS (SELECT teamID, yearID, SUM(salary) AS total_spend
@@ -59,6 +67,9 @@ The primary goal of this project is to use advanced SQL querying techniques to a
 	ROUND(SUM(total_spend) OVER (PARTITION BY teamID ORDER BY yearID) / 1000000, 1)
 	AS cumulative_sum_millions
 	FROM ts;
+ 
+ ![task 5](https://github.com/user-attachments/assets/4785f4ef-5538-4a1c-ad4e-d8529a8b507c)
+
  
 ### 6. Return the first year that each team's cumulative spending surpassed 1 billion?
 
@@ -80,6 +91,7 @@ The primary goal of this project is to use advanced SQL querying techniques to a
 	FROM	rn
 	WHERE	rn = 1;
 
+![task 6](https://github.com/user-attachments/assets/d0279e2a-0e91-4ef9-a88a-83027bb3d980)
 
 ### 7. For each player, calculate their age at their first (debut) game, their last game, and their career length (all in years). Sort from longest career to shortest career.
 
@@ -92,6 +104,8 @@ The primary goal of this project is to use advanced SQL querying techniques to a
 	FROM players
 	ORDER BY career_length DESC;
 
+ ![task 7](https://github.com/user-attachments/assets/ed7029e2-3cbf-4dcc-bc02-5a8083bce234)
+
 ### 8. What team did each player play on for their starting and ending years? 
 
 	SELECT 	p.nameGiven,
@@ -103,7 +117,9 @@ The primary goal of this project is to use advanced SQL querying techniques to a
 		INNER JOIN salaries e
 		ON p.playerID = e.playerID
 		AND YEAR(p.finalGame) = e.yearID;
- 
+  
+  ![task 8](https://github.com/user-attachments/assets/f3c026ce-c1b9-4582-9ee6-9c54b00b27f8)
+
  ### 9. How many players started and ended on the same team and also played for over a decade?
 	
 	SELECT 	p.nameGiven,
@@ -117,6 +133,9 @@ The primary goal of this project is to use advanced SQL querying techniques to a
 		AND YEAR(p.finalGame) = e.yearID
 	WHERE	s.teamID = e.teamID AND e.yearID - s.yearID > 10;
 
+ ![task 9](https://github.com/user-attachments/assets/83379a01-4679-47be-bd4c-67695e7087be)
+
+
  ### 10. Create a summary table that shows for each team, what percent of players bat right, left and both?
 
 	SELECT	s.teamID,
@@ -126,6 +145,9 @@ The primary goal of this project is to use advanced SQL querying techniques to a
 	FROM	salaries s LEFT JOIN players p
 		ON s.playerID = p.playerID
 	GROUP BY s.teamID;
+
+ ![task 10](https://github.com/user-attachments/assets/47395f87-455e-4b4a-bdc6-003c93bc7fce)
+
 	
 
 
